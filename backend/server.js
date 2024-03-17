@@ -6,13 +6,15 @@
     const app = express();
     
     const userRoutes = require('./routes/userRoutes');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+    const chatRoutes = require('./routes/chatRoutes');
+    const { notFound, errorHandler } = require('./middleware/errorMiddleware');
     
     connectDB()
     app.use(cors())
     app.use(express.json());
 
-    app.use('/api/user', userRoutes)
+    app.use('/api/user', userRoutes);
+    app.use("/api/chat", chatRoutes);
     
     app.use(notFound);
     app.use(errorHandler)
