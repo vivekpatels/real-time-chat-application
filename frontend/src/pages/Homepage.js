@@ -15,16 +15,15 @@ import {
   import "../App.css"
   
   function Homepage() {
-    const history = useNavigate();
+    const navigate = useNavigate();
   
     useEffect(() => {
       const user = JSON.parse(localStorage.getItem("userInfo"));
   
-      if (user) history.push("/chats");
-    }, [history]);
+      if (user)  navigate("/chats");
+    }, [navigate]);
   
     return (
-    <div className="App">
       <Container maxW="xl" centerContent>
         <Box
           d="flex"
@@ -57,7 +56,6 @@ import {
           </Tabs>
         </Box>
       </Container>
-      </div>
     );
   }
   

@@ -1,25 +1,45 @@
-import React, { useEffect, useState } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
+import "../App.css"
+import { ChatState } from '../context/ChatProvider'
+import { Box } from '@chakra-ui/react';
+import SideDrawer from '../components/miscellaneous/SideDrawer';
+import MyChats from '../components/MyChats';
+import Chatbox from '../components/Chatbox';
+
+import { Flex, Spacer } from '@chakra-ui/react'
 
 const Chatpage = () => {
-    const [chats, setChats] = useState([])
 
-    const fetchChats = async () => {
-       const {data} = await axios.get("/api/chat");
-       setChats(data)
-    }
-
-    useEffect(() => {
-        fetchChats()
-    }, [])
+  const [fetchAgain, setFetchAgain] = useState(false);
+ const { user } = ChatState();
 
   return (
-    <div>
-       {chats.map((item) => {
-        return <p>{item.chatName}</p>
-       })}
-    </div>
+    <div style={{ width: "100%" }}>
+    {user && <SideDrawer />}
+      <Flex>
+        <Box p={4}>
+      {user && <MyChats fetchAgain={fetchAgain} />}
+      </Box>
+      <Spacer />
+      <Box p={4}>
+      {user && (
+        <Chatbox fetchAgain={fetchAgain} setFetchAgain={setFetchAgain} />
+        )}
+        </Box>
+        </Flex>
+  </div>
   )
 }
 
-export default Chatpage
+export default Chatpage;
+
+
+<Flex>
+  <Box p='4' bg='red.400'>
+    Box 1
+  </Box>
+  <Spacer />
+  <Box p='4' bg='green.400'>
+    Box 2
+  </Box>
+</Flex>

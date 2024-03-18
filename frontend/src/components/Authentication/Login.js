@@ -16,7 +16,7 @@ const Login = () => {
   const [password, setPassword] = useState();
   const [loading, setLoading] = useState(false);
 
-  const history = useNavigate();
+  const navigate = useNavigate();
 //   const { setUser } = ChatState();
 
   const submitHandler = async () => {
@@ -53,14 +53,14 @@ const Login = () => {
         isClosable: true,
         position: "bottom",
       });
-    //   setUser(data);
+      // setUser(data);
       localStorage.setItem("userInfo", JSON.stringify(data));
       setLoading(false);
-      history.push("/chats");
+      navigate("/chats")
     } catch (error) {
       toast({
         title: "Error Occured!",
-        description: error.response.data.message,
+        description: error?.response?.data?.message,
         status: "error",
         duration: 5000,
         isClosable: true,
